@@ -22,3 +22,19 @@ const addTodo = (todo) => localStorage.setItem(storageKey, convertObjToString([.
 //Note: the argument in the filter function begins with an underscore to differentiate it from the earlier argument.
 const deleteTodo = (todo) => localStorage
 	.setItem(storageKey, convertObjToString(getTodos().filter(_todo => _todo !== todo)));
+
+//Build a to-do element and return it.
+const buildTodoEl = (todo) => {
+	//Create a list item element.
+	const el = document.createElement('li');
+	//Add a Bootstrap list-group-item class.
+	el.classList.add('list-group-item');
+	//Set the text inside of the list item equal to to-do.
+	el.innerText = todo;
+	//Return the list item.
+	return el;
+};
+
+//The following function injects the list item into the unordered list.
+//Grab the unordered list from the DOM and append the el element onto it.
+const appendLiToDom = (el) => document.getElementById('todo-list-container').appendChild(el);
