@@ -75,6 +75,8 @@ const initClickListeners = () => {
 	});
 };
 
+document.addEventListener('DOMContentLoaded', () => displayTodos());
+
 ////Grab the submit button by its ID and add a click event listener.
 document.getElementById('submit-new-todo-btn').addEventListener('click', (e) => {
 	//Grab the input area by its ID.
@@ -90,8 +92,10 @@ document.getElementById('submit-new-todo-btn').addEventListener('click', (e) => 
 });
 
 //Grab the reset button by its ID and add a click event listener.
+/*
 document.getElementById('reset-local-storage-btn').addEventListener('click', (e) => {
 	//Delete everything in local storage and refresh the to-do list.
 	localStorage.removeItem(storageKey);
 	displayTodos();
 });
+*/
