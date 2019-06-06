@@ -59,9 +59,39 @@ const displayTodos = () => {
 //This function initializes all of the 'click' event listeners for the to-dos.
 const initClickListeners = () => {
 	//Take the list-group-item class, push it into a query list, and create an array from the query list.
+	//Use a forEach loop on that array.
 	Array.from(document.getElementsByClassName('list-group-item')).forEach(item => {
-		item.addEventListener('click', ($event) => {
-			const todo = $event.target.innerText;
+		//Add a click event listener.
+		item.addEventListener('click', (e) => {
+			//Figure out which to-do was clicked.
+			const todo = e.target.innerText;
+			//If the user confirms he/she/they want(s) to delete task,
+			//delete it and refresh the to-do list.
+			if (window.confirm('Have you completed this task? ' + todo)) {
+				deleteTodo(todo);
+				displayTodos();
+			}
 		});
 	});
 };
+
+////Grab the submit button by its ID and add a click event listener.
+document.getElementById('submit-new-todo-btn').addEventListener('click', (e) => {
+	//Grab the input area by its ID.
+	const newTodoInput = document.getElementById('new-todo-input');
+	//Check to see if something has been entered into the input area.
+	if (newTodoInput.value) {
+		//If the conditional statement passes,
+		// add the input as a list item, trim any whitespace from the beginning and/or end,
+		// and refresh the to-do list.
+		addTodo(newTodoInput.value.trim());
+		displayTodos();
+	}
+});
+
+//Grab the reset button by its ID and add a click event listener.
+document.getElementById('reset-local-storage-btn').addEventListener('click', (e) => {
+	//Delete everything in local storage and refresh the to-do list.
+	localStorage.removeItem(storageKey);
+	displayTodos();
+});
