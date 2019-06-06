@@ -38,3 +38,30 @@ const buildTodoEl = (todo) => {
 //The following function injects the list item into the unordered list.
 //Grab the unordered list from the DOM and append the el element onto it.
 const appendLiToDom = (el) => document.getElementById('todo-list-container').appendChild(el);
+
+//This function clears the to-do list.
+//Grab the unordered list from the DOM and set that piece of HTML to an empty string.
+const clearTodoListDisplay = () => document.getElementById('todo-list-container').innerHTML = '';
+
+//This function clears what the user enters in the input area.
+//Grab the value attribute of the new-to-do-input id and set it equal to an empty string.
+const clearInput = () => document.getElementById('new-todo-input').value = '';
+
+//
+const displayTodos = () => {
+	clearInput();
+	clearTodoListDisplay();
+	//Pass in the current _todo as we iterate through the array and pass what that gives us to the DOM.
+	getTodos().forEach(_todo => appendLiToDom(buildTodoEl(_todo)));
+	initClickListeners();
+};
+
+//This function initializes all of the 'click' event listeners for the to-dos.
+const initClickListeners = () => {
+	//Take the list-group-item class, push it into a query list, and create an array from the query list.
+	Array.from(document.getElementsByClassName('list-group-item')).forEach(item => {
+		item.addEventListener('click', ($event) => {
+			const todo = $event.target.innerText;
+		});
+	});
+};
